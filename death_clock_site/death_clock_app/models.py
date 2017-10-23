@@ -31,11 +31,13 @@ user_obj.UserInf
 """
 class UserInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    dob = models.DateField()
-    sex = models.CharField(max_length=1, choices=(
-                                                   ('M', 'Male'),
-                                                   ('F','Female')
-                                                 ))
+    dob = models.DateField(null=True)
+    sex = models.CharField(max_length=1,
+                           choices=(
+                                    ('M', 'Male'),
+                                    ('F', 'Female')
+                                    ),
+                           null=True)
 
 """
 Hook up our extra information so that when we make a user we can have
