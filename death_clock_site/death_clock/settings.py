@@ -49,8 +49,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-SESSION_COOKIE_SECURE = True
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+#SESSION_COOKIE_SECURE = True
+#SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 ROOT_URLCONF = 'death_clock.urls'
 
@@ -126,4 +126,4 @@ STATIC_URL = '/static/'
 
 LOGIN_URL = '/login/'
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/index/'
