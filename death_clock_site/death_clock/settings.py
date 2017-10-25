@@ -59,7 +59,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(os.path.dirname(os.path.dirname(__file__)), 'death_clock_app', 'templates')
+            os.path.join(BASE_DIR, 'death_clock_app', 'templates')
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
