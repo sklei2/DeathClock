@@ -13,7 +13,6 @@ class Question(models.Model):
     def __str__(self):
         return self.question
 
-
 """
 Cause of death is used by answers to figure out how its impact fits into the algorithm
 """
@@ -35,7 +34,6 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.text
-
 
 
 """
