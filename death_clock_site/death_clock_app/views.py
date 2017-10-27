@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, render_to_response
 from .forms import *
 from django.db import IntegrityError
+from django.urls import reverse
 
 
 # Create your views here.
@@ -21,6 +22,7 @@ def login(request):
             user = authenticate(request, username=user_name, password=password)
             if user is not None:
                 auth_login(request, user)
+                HttpResponseRedirect(reverse('index'))
     else:
         # otherwise we're going to this page from some redirect
         form = LoginForm
@@ -37,7 +39,7 @@ def signup(request):
                 pwd = request.POST.get('pwd')
                 user = User.objects.create_user(username=user_name, password=pwd)
                 user.save()
-                HttpResponseRedirect('/')
+                HttpResponseRedirect(reverse('login'))
             except IntegrityError:
                 # We already have this user!
                 render_to_response('signup.html', {'message': 'user already exists'})

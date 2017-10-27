@@ -16,8 +16,9 @@ class UserSignupForm(forms.Form):
     username = forms.CharField(required=True,
                                label='Username')
     pwd = forms.CharField(required=True,
-                                widget=forms.PasswordInput(),
-                                label='Password')
+                          widget=forms.PasswordInput(),
+                          label='Password')
+
     pwd_check = forms.CharField(required=True,
                                 widget=forms.PasswordInput(),
                                 label='Confirm Password')
