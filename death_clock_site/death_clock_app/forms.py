@@ -10,3 +10,25 @@ class LoginForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
+
+
+class UserSignupForm(forms.Form):
+    username = forms.CharField(required=True,
+                               label='Username')
+    pwd = forms.CharField(required=True,
+                                widget=forms.PasswordInput(),
+                                label='Password')
+    pwd_check = forms.CharField(required=True,
+                                widget=forms.PasswordInput(),
+                                label='Confirm Password')
+
+    def __init__(self, *args, **kwargs):
+        super(UserSignupForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        try:
+            if self.cleaned_data['pwd'] != self.cleaned_data['pwd_check']:
+                raise forms.ValidationError("Passwords do not match")
+        except KeyError:
+            pass
+        return self.cleaned_data
