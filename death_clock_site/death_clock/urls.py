@@ -21,5 +21,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     # ex: /death_clock/
-    url(r'^$', include('death_clock_app.urls'))
+    url(r'^', include('death_clock_app.urls'))
 ]
