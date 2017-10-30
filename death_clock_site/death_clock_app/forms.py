@@ -28,8 +28,11 @@ class UserSignupForm(forms.Form):
 
     def clean(self):
         try:
+            errors = []
             if self.cleaned_data['pwd'] != self.cleaned_data['pwd_check']:
-                raise forms.ValidationError("Passwords do not match")
+                errors.append("Passwords do not match")
+            if any(errors):
+                raise forms.ValidationError(errors)
         except KeyError:
             pass
         return self.cleaned_data
