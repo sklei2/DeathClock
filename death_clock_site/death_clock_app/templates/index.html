@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Index</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %} Index {% endblock %}
+
+{% block content %}
+<div id="content">
     <p>{{ username }} is logged in!</p>
     <a href="/logout/" id="logout">Log Out</a>
-</body>
-</html>
+</div>
+{% endblock %}
