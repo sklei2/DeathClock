@@ -50,11 +50,11 @@ class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE,
                                 related_name='profile')
-    dob = models.DateField()
+    dob = models.DateField(null=True)
     sex = models.CharField(max_length=1, choices=(
                                                    ('M', 'Male'),
                                                    ('F', 'Female')
-                                                 ))
+                                                 ),null = True)
     life_expectancy = models.DateField(null=True)
 
     class Meta:
