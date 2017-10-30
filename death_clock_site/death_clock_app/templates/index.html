@@ -5,6 +5,10 @@
     <title></title>
 </head>
 <body>
-
+    <form id="question_form" action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_ul }}
+        <input id="submit_btn" type="submit" value="Submit">
+    </form>
 </body>
 </html>

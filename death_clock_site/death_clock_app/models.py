@@ -10,6 +10,15 @@ class Question(models.Model):
 	def __str__(self):
 		return self.question
 
+"""
+Cause of death is used by answers to figure out how its impact fits into the algorithm
+"""
+class Cause_Of_Death(models.Model):
+	name = models.CharField(max_length=256)
+
+	def __str__(self):
+		return self.name
+
 
 """
 Answers store the question they are attached to, their impact amount and link to an impact type (Cause of Death)
@@ -24,11 +33,3 @@ class Answer(models.Model):
 		return self.text
 
 
-"""
-Cause of death is used by answers to figure out how its impact fits into the algorithm
-"""
-class Cause_Of_Death(models.Model):
-	name = models.CharField(max_length=256)
-
-	def __str__(self):
-		return self.name
