@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c8594cd3-7e80-4e0b-bef1-7409763832e4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/death_clock_site/death_clock_app/templates/login.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/death_clock_site/death_clock_app/static/js/login.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/death_clock_site/death_clock_app/templates/signup.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/death_clock_site/db.sqlite3" afterPath="$PROJECT_DIR$/death_clock_site/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/death_clock_site/death_clock_app/admin.py" afterPath="$PROJECT_DIR$/death_clock_site/death_clock_app/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/death_clock_site/death_clock_app/forms.py" afterPath="$PROJECT_DIR$/death_clock_site/death_clock_app/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/death_clock_site/death_clock_app/templates/index.html" afterPath="$PROJECT_DIR$/death_clock_site/death_clock_app/templates/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/death_clock_site/death_clock_app/models.py" afterPath="$PROJECT_DIR$/death_clock_site/death_clock_app/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/death_clock_site/death_clock/settings.py" afterPath="$PROJECT_DIR$/death_clock_site/death_clock/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/death_clock_site/death_clock/urls.py" afterPath="$PROJECT_DIR$/death_clock_site/death_clock/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/death_clock_site/death_clock_app/urls.py" afterPath="$PROJECT_DIR$/death_clock_site/death_clock_app/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/death_clock_site/death_clock_app/views.py" afterPath="$PROJECT_DIR$/death_clock_site/death_clock_app/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="c8594cd3-7e80-4e0b-bef1-7409763832e4" name="Default" comment="" />
     <ignored path="DeathClock.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
