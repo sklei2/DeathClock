@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block right_navigation %}
+<li><a href="/test/" class="{% block testclass %}{% endblock %}">Take our Test!</a></li>
+<li>
+    <img src="{% static img/blank-profile-picture.png %}", alt="profile_pictue", class="profile_dropdown"/>
+    <ul class="drop_down_content">
+        <li><a href="profile/">Profile</a></li>
+        <li><a href="logout/">Log Out</a></li>
+    </ul>
+</li>
+
+{% endblock %}

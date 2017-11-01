@@ -3,6 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}{% endblock %}</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/site.css' %}"/>
         {% block scripts %}{% endblock %}
         {% block styles %}{% endblock %}
     </head>
@@ -10,14 +12,20 @@
         <div id="nav">
             {% block navigation %}
             <ul id="top">
-                <li><a href="/" class="{% block homeclass %}{% endblock %}">Home</a></li>
-                <li><a href="/test/" class="{% block testclass %}{% endblock %}">Take Test</a></li>
-                <li>
-                    <ul id="profileDropdown">
-                        <a href="/profile/" class="{% block profileclass %}{% endblock %}">Profile</a>
-                        <a href="/logout/" class="{% block logoutclass %}{% endblock %}">Logout</a>
-                    </ul>
+                {% block left_navigation %}
+                <li class="{% block left_class %}{% endblock %}">
+                    <a href="/" class="{% block homeclass %}{% endblock %}">Home</a>
                 </li>
+                {% endblock %}
+                {% block right_navigation %}
+                <li class="{% block right_class %}{% endblock %}">
+                    <form id="login_form" action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input id="login_btn" type="submit" value="Login">
+                    </form>
+                </li>
+                {% endblock %}
             </ul>
             {% endblock %}
         </div>
