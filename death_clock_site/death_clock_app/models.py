@@ -13,7 +13,6 @@ class Question(models.Model):
     def __str__(self):
         return self.question
 
-
 """
 Cause of death is used by answers to figure out how its impact fits into the algorithm
 """
@@ -37,7 +36,6 @@ class Answer(models.Model):
         return self.text
 
 
-
 """
 Storing extra information in the User model for their
 general information. This is something that we could possibly
@@ -51,10 +49,12 @@ class Profile(models.Model):
                                 on_delete=models.CASCADE,
                                 related_name='profile')
     dob = models.DateField(null=True)
-    sex = models.CharField(max_length=1, choices=(
-                                                   ('M', 'Male'),
-                                                   ('F', 'Female')
-                                                 ),null = True)
+    sex = models.CharField(max_length=1,
+                           choices=(
+                                    ('M', 'Male'),
+                                    ('F', 'Female')
+                                    ),
+                           null=True)
     life_expectancy = models.DateField(null=True)
 
     class Meta:
