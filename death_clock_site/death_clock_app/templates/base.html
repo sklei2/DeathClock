@@ -19,7 +19,7 @@
                 {% endblock %}
                 {% block right_navigation %}
                 <li class="{% block right_class %}{% endblock %}">
-                    <form id="login_form" action="{% url 'login' %}" method="post">
+                    <form id="login_form" action="/login/" method="post">
                     {% csrf_token %}
                     {{ form }}
                     <input id="login_btn" type="submit" value="Login">
