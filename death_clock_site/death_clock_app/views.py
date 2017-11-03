@@ -56,11 +56,7 @@ def dummyForm(request):
         form = DummyForm
     return render(request, 'dummy.html', {'form': form})
 
+@login_required
 def index(request):
-    return HttpResponse('hello')
-
-
-#@login_required
-#def index(request):
-#    user = request.user
-#    return HttpResponse('{} is all logged in!'.format(user.username))
+    user = request.user
+    return HttpResponse('{} is all logged in!'.format(user.username))
