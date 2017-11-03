@@ -10,6 +10,7 @@ from django.shortcuts import render, render_to_response
 from .forms import *
 from django.db import IntegrityError
 from django.urls import reverse
+from . import death_algorithm
 
 
 # Create your views here.
@@ -62,6 +63,8 @@ def index(request):
 	if request.method == 'POST':
 		form = QuestionForm(data=request.POST)
 		# Insert code to apply results to user object here
+		death_algorithm([x for x in request.POST if x.key != 'csrfmiddlewaretoken'])
+
 
 	# If get, then display new form
 	else:
