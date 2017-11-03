@@ -1,3 +1,32 @@
 body {
     background-color: #B6CDE5;
 }
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.profile_picture {
+    max-width: 50px;
+}
+
+.dropdown_content {
+    display: none;
+    position: absolute;
+    mid-width: 160px;
+    z-index: 1;
+}
+
+.dropdown_content a {
+    text-decoration: none;
+    display: block;
+}
+
+.show {
+    display: block;
+}
+
+navbar ul li {
+    text-decoration: none;
+}

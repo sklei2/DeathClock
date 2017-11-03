@@ -1,13 +1,18 @@
 {% extends "base.html" %}
 {% load static %}
+
+{% block scripts %}
+<script src="{% static 'js/site.js' %}'" ></script>
+{% endblock %}
+
 {% block right_navigation %}
-<li><a href="/test/" class="{% block testclass %}{% endblock %}">Take our Test!</a></li>
-<li>
-    <img src="{% static 'img/blank-profile-picture.png' %}" alt="profile_pictue" class="profile_dropdown"/>
-    <ul class="drop_down_content">
-        <li><a href="profile/">Profile</a></li>
-        <li><a href="logout/">Log Out</a></li>
-    </ul>
-</li>
+<div><a href="/test/" class="{% block testclass %}{% endblock %}">Take our Test!</a></div>
+<div class="dropdown" onclick="profileImageClick()">
+    <img src="{% static 'img/blank-profile-picture.png' %}" alt="profile_pictue" class="profile_picture"/>
+    <div id="profile_dropdown_content" class="dropdown_content">
+        <a href="profile/">Profile</a>
+        <a href="logout/">Log Out</a>
+    </div>
+</div>
 
 {% endblock %}

@@ -11,22 +11,22 @@
     <body class="{%block bodyclass %}{% endblock %}">
         <div id="nav">
             {% block navigation %}
-            <ul id="top">
+            <div id="top">
                 {% block left_navigation %}
-                <li class="{% block left_class %}{% endblock %}">
+                <div class="{% block left_class %}{% endblock %}">
                     <a href="/" class="{% block homeclass %}{% endblock %}">Home</a>
-                </li>
+                </div>
                 {% endblock %}
                 {% block right_navigation %}
-                <li class="{% block right_class %}{% endblock %}">
+                <div class="{% block right_class %}{% endblock %}">
                     <form id="login_form" action="/login/" method="post">
                     {% csrf_token %}
                     {{ form }}
                     <input id="login_btn" type="submit" value="Login">
                     </form>
-                </li>
+                </div>
                 {% endblock %}
-            </ul>
+            </div>
             {% endblock %}
         </div>
 
