@@ -62,10 +62,12 @@ def profile(request):
     template = loader.get_template('profile.html')
 
     today = datetime.date.today()
-    temp = request.user.profile.life_expectancy
-    request.user.profile.life_expectancy = temp - today
+    try:
+        life_expectancy = request.user.profile.life_expectancy - today
+    except TypeError:
+        life_expectancy = "Please take our test first"
 
-    return render(request, 'profile.html' )
+    return render(request, 'profile.html', {'life_expectancy': life_expectancy})
 
 @login_required(login_url='/login/')
 def index(request):
