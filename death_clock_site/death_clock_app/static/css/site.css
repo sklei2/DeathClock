@@ -2,6 +2,21 @@ body {
     background-color: #B6CDE5;
 }
 
+#nav {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    display: inline-block;
+}
+
+#right_nav {
+    float: right;
+}
+
+.nav_item {
+    display: inline-block;
+}
+
 .dropdown {
     position: relative;
     display: inline-block;
@@ -14,19 +29,24 @@ body {
 .dropdown_content {
     display: none;
     position: absolute;
-    mid-width: 160px;
     z-index: 1;
 }
 
 .dropdown_content a {
     text-decoration: none;
     display: block;
+    background: #e4e6e7;
+    min-width: 100px;
+    text-align: center;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.dropdown_first {
+    border-top: 1px solid black;
 }
 
 .show {
     display: block;
-}
-
-navbar ul li {
-    text-decoration: none;
 }

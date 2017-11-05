@@ -10,15 +10,16 @@
     </head>
     <body class="{%block bodyclass %}{% endblock %}">
         <div id="nav">
-            {% block navigation %}
-            <div id="top">
+            <div id="left_nav" class="nav_item">
                 {% block left_navigation %}
-                <div class="{% block left_class %}{% endblock %}">
+                <div class="{% block left_class %}{% endblock %} nav_item">
                     <a href="/" class="{% block homeclass %}{% endblock %}">Home</a>
                 </div>
                 {% endblock %}
+            </div>
+            <div id="right_nav" class="nav_item">
                 {% block right_navigation %}
-                <div class="{% block right_class %}{% endblock %}">
+                <div class="{% block right_class %}{% endblock %} nav_item">
                     <form id="login_form" action="/login/" method="post">
                     {% csrf_token %}
                     {{ form }}
@@ -27,7 +28,6 @@
                 </div>
                 {% endblock %}
             </div>
-            {% endblock %}
         </div>
 
         {% block content %}
@@ -35,6 +35,5 @@
             <p> Hello {{username}}, welcome to DeathClock!</p>
         </div>
         {% endblock %}
-
     </body>
 </html>

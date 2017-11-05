@@ -2,17 +2,16 @@
 {% load static %}
 
 {% block scripts %}
-<script src="{% static 'js/site.js' %}'" ></script>
+<script src="{% static 'js/site.js' %}"></script>
 {% endblock %}
 
 {% block right_navigation %}
-<div><a href="/test/" class="{% block testclass %}{% endblock %}">Take our Test!</a></div>
-<div class="dropdown" onclick="profileImageClick()">
-    <img src="{% static 'img/blank-profile-picture.png' %}" alt="profile_pictue" class="profile_picture"/>
-    <div id="profile_dropdown_content" class="dropdown_content">
-        <a href="profile/">Profile</a>
+<div class="nav_item"><a href="/test/" class="{% block testclass %}{% endblock %}">Take our Test!</a></div>
+<div class="nav_item" onclick="profileImageClick()">
+    <img src="{% static 'img/blank-profile-picture.png' %}" alt="profile_pictue" class="profile_picture dropdown"/>
+    <div id="dropdown_content" class="dropdown_content">
+        <a href="profile/" class="dropdown_first">Profile</a>
         <a href="logout/">Log Out</a>
     </div>
 </div>
-
 {% endblock %}
