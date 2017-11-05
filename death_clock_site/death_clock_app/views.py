@@ -61,8 +61,8 @@ def signup(request):
 def profile(request):
     template = loader.get_template('profile.html')
 
-    today = datetime.date.today()
     try:
+        today = datetime.date.today()
         life_expectancy = request.user.profile.life_expectancy - today
     except TypeError:
         life_expectancy = "Please take our test first"
