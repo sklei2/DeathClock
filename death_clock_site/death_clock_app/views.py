@@ -69,6 +69,7 @@ def profile(request):
 
     return render(request, 'profile.html', {'life_expectancy': life_expectancy})
 
+
 @login_required(login_url='/login/')
 def index(request):
     user = request.user
