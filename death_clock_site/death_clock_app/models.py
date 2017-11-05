@@ -7,8 +7,6 @@ from django.dispatch import receiver
 Questions store only the text of the question its self
 answers must be found in the answer's table using a lookup function/statment
 """
-
-
 class Question(models.Model):
     question = models.CharField(max_length=4096)
 
