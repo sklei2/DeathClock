@@ -11,6 +11,8 @@ from .forms import *
 from django.db import IntegrityError
 from django.urls import reverse
 from . import death_algorithm
+from django.template import loader
+import datetime
 
 
 # Create your views here.
@@ -55,6 +57,17 @@ def signup(request):
         form = UserSignupForm
     return render(request, 'signup.html', {'form': form})
 
+
+def profile(request):
+    template = loader.get_template('profile.html')
+
+    try:
+        today = datetime.date.today()
+        life_expectancy = request.user.profile.life_expectancy - today
+    except TypeError:
+        life_expectancy = "Please take our test first"
+
+    return render(request, 'profile.html', {'life_expectancy': life_expectancy})
 
 @login_required(login_url='/login/')
 def index(request):
