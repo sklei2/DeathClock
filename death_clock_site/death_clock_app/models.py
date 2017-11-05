@@ -7,11 +7,14 @@ from django.dispatch import receiver
 Questions store only the text of the question its self
 answers must be found in the answer's table using a lookup function/statment
 """
+
+
 class Question(models.Model):
     question = models.CharField(max_length=4096)
 
     def __str__(self):
         return self.question
+
 
 """
 Cause of death is used by answers to figure out how its impact fits into the algorithm
@@ -21,15 +24,6 @@ class CauseOfDeath(models.Model):
 
     def __str__(self):
         return self.name
-
-"""
-Cause of death is used by answers to figure out how its impact fits into the algorithm
-"""
-class Cause_Of_Death(models.Model):
-	name = models.CharField(max_length=256)
-
-	def __str__(self):
-		return self.name
 
 
 """
@@ -43,6 +37,7 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.text
+
 
 """
 Storing extra information in the User model for their
@@ -59,9 +54,9 @@ class Profile(models.Model):
     dob = models.DateField(null=True)
     sex = models.CharField(max_length=1,
                            choices=(
-                                    ('M', 'Male'),
-                                    ('F', 'Female')
-                                    ),
+                               ('M', 'Male'),
+                               ('F', 'Female')
+                           ),
                            null=True)
     life_expectancy = models.DateField(null=True)
 
