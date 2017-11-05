@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'death_clock_app.apps.DeathClockAppConfig'
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,7 +55,6 @@ ROOT_URLCONF = 'death_clock.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-
         'DIRS': [
             os.path.join(BASE_DIR, 'death_clock_app', 'templates')
                  ],
