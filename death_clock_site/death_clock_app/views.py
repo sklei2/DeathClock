@@ -14,6 +14,8 @@ from django.shortcuts import render, render_to_response
 from .forms import *
 from django.db import IntegrityError
 from django.urls import reverse
+from django.template import loader
+import datetime
 
 # Create your views here.
 def login(request):
@@ -65,6 +67,17 @@ def dummyForm(request):
     else:
         form = DummyForm
     return render(request, 'dummy.html', {'form': form})
+
+def profile(request):
+    template = loader.get_template('profile.html')
+
+    try:
+        today = datetime.date.today()
+        life_expectancy = request.user.profile.life_expectancy - today
+    except TypeError:
+        life_expectancy = "Please take our test first"
+
+    return render(request, 'profile.html', {'life_expectancy': life_expectancy})
 
 @login_required(login_url='/login/')
 def index(request):

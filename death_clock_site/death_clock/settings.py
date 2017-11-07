@@ -55,6 +55,7 @@ ROOT_URLCONF = 'death_clock.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+
         'DIRS': [
             os.path.join(BASE_DIR, 'death_clock_app', 'templates')
                  ],
