@@ -3,4 +3,10 @@
 {% block content %}
     <p>{{ username }} is logged in!</p>
     <a href="/logout/" id="logout">Log Out</a>
+
+    <form id="question_form" action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_ul }}
+        <input id="submit_btn" type="submit" value="Submit">
+    </form>
 {% endblock %}
