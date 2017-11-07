@@ -6,7 +6,7 @@ from .views import *
 from . import views
 
 urlpatterns = [
-
+    url(r'^dummy/?', dummyForm),
     url(r'^profile/', views.profile, name='profile'),
     url(r'^login/?', login, name='login'),
     url(r'^signup/?', signup, name='sign_up'),

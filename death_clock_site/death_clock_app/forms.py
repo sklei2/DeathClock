@@ -1,5 +1,13 @@
 from django import forms
 
+OPTIONS = [
+    (1, 'Morbidly Obese'),
+    (2, 'Normal'),
+]
+
+class DummyForm(forms.Form):
+    example = forms.ChoiceField(choices=OPTIONS, required=True)
+
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 

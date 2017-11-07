@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.shortcuts import render
+from django.http import HttpResponse
+from .forms import DummyForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import authenticate
@@ -12,7 +15,6 @@ from .forms import *
 from django.db import IntegrityError
 from django.urls import reverse
 from django.template import loader
-
 import datetime
 
 # Create your views here.
@@ -57,6 +59,14 @@ def signup(request):
         form = UserSignupForm
     return render(request, 'signup.html', {'form': form})
 
+def dummyForm(request):
+    if request.method == 'POST':
+        form = DummyForm(request.POST)
+        if form.is_valid():
+            return HttpResponseRedirect('/')
+    else:
+        form = DummyForm
+    return render(request, 'dummy.html', {'form': form})
 
 def profile(request):
     template = loader.get_template('profile.html')
