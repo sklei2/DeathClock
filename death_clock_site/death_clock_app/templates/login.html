@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    {% load static%}
-    <script type="text/javascript" src="{% static 'js/login.js' %}"></script>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
     <form id="login_form" action="" method="post">
         {% csrf_token %}
         {{ form }}
         <input id="login_btn" type="submit" value="Login">
     </form>
     <a href="/signup/">Sign Up</a>
-</body>
-</html>
+{% endblock %}

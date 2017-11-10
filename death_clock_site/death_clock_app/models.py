@@ -13,6 +13,7 @@ class Question(models.Model):
     def __str__(self):
         return self.question
 
+
 """
 Cause of death is used by answers to figure out how its impact fits into the algorithm
 """
@@ -51,9 +52,9 @@ class Profile(models.Model):
     dob = models.DateField(null=True)
     sex = models.CharField(max_length=1,
                            choices=(
-                                    ('M', 'Male'),
-                                    ('F', 'Female')
-                                    ),
+                               ('M', 'Male'),
+                               ('F', 'Female')
+                           ),
                            null=True)
     life_expectancy = models.DateField(null=True)
 

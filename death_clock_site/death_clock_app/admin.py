@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 from django.contrib import admin
+from . import models
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
@@ -26,3 +26,6 @@ class CustomUserAdmin(UserAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
+admin.site.register(models.Question)
+admin.site.register(models.Answer)
+admin.site.register(models.CauseOfDeath)

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import authenticate
@@ -12,6 +11,8 @@ from .forms import *
 from django.db import IntegrityError
 from django.urls import reverse
 from .models import *
+from . import death_algorithm
+from django.template import loader
 import datetime
 
 
@@ -58,16 +59,41 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 
 
+def profile(request):
+    template = loader.get_template('profile.html')
+
+    try:
+        today = datetime.date.today()
+        life_expectancy = request.user.profile.life_expectancy - today
+    except TypeError:
+        life_expectancy = "Please take our test first"
+
+    return render(request, 'profile.html', {'life_expectancy': life_expectancy})
+
+
 @login_required(login_url='/login/')
 def index(request):
     user = request.user
-    return render(request, 'index.html', {'username': user.username})
+    # If post, then display form with previous data
+    if request.method == 'POST':
+        form = QuestionForm(data=request.POST)
+        # Insert code to apply results to user object here
+        death_algorithm([x for x in request.POST if x.key != 'csrfmiddlewaretoken'])
+
+    # If get, then display new form
+    else:
+        form = QuestionForm()
+
+    return render(request, 'index.html', {'username': user.username, 'form': form})
 
 def display(request):
     profile = Profile.objects.get(user=request.user)
-    if profile.life_expectancy == None:
+    if profile.life_expectancy == None and profile.dob != None:
         life_expectancy = datetime.date.today()
         life_expectancy = life_expectancy.replace(year = 78 + profile.dob.year)
+        return render(request, 'display.html', {'life_expectancy': life_expectancy})
+    elif profile.life_expectancy == None and profile.dob == None:
+        life_expectancy = datetime.date.today().replace(year = 78 + datetime.date.today().year)
         return render(request, 'display.html', {'life_expectancy': life_expectancy})
     else:
         return render(request, 'display.html', {'life_expectancy': profile.life_expectancy})
