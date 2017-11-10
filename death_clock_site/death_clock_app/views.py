@@ -11,6 +11,8 @@ from django.shortcuts import render, render_to_response
 from .forms import *
 from django.db import IntegrityError
 from django.urls import reverse
+from .models import *
+import datetime
 
 
 # Create your views here.
@@ -60,3 +62,11 @@ def signup(request):
 def index(request):
     user = request.user
     return render(request, 'index.html', {'username': user.username})
+
+def display(request):
+    profile = Profile.objects.get(user=request.user)
+    if profile.life_expectancy == None:
+        life_expectancy = datetime.date(2018, 11, 8)
+        return render(request, 'display.html', {'life_expectancy': life_expectancy})
+    else:
+        return render(request, 'display.html', {'life_expectancy': profile.life_expectancy})
