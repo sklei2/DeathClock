@@ -66,7 +66,8 @@ def index(request):
 def display(request):
     profile = Profile.objects.get(user=request.user)
     if profile.life_expectancy == None:
-        life_expectancy = datetime.date(2018, 11, 8)
+        life_expectancy = datetime.date.today()
+        life_expectancy = life_expectancy.replace(year = 78 + profile.dob.year)
         return render(request, 'display.html', {'life_expectancy': life_expectancy})
     else:
         return render(request, 'display.html', {'life_expectancy': profile.life_expectancy})
