@@ -2,14 +2,25 @@
 {% load static %}
 
 {% block left_nav %}
-<ul class="navbar-nav mr-auto">
-  <li class="nav-item active">
-    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-  </li>
-  <li class="nav-item">
+<li class="active">
+    <a class="nav-link" href="/index/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="">
     <a class="nav-link" href="#">Calculate Death</a>
-  </li>
-</ul>
+</li>
 {% endblock %}
 {% block right_nav %}
+<li class="nav-item">
+    <div class="dropdown">
+        <img class="dropdown-toggle profile_picture" data-toggle="dropdown" src="{% static 'img/blank-profile-picture.png' %}">
+        <ul class="dropdown-menu">
+            <li>
+                <a href="/profile/">Profile</a>
+            </li>
+            <li>
+                <a href="/logout/">Log Out</a>
+            </li>
+        </ul>
+    </div>
+</li>
 {% endblock %}

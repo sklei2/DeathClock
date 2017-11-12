@@ -2,10 +2,13 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Index</title>
+        <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
         {% load static %}
         <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/site.css' %}">
+        {% block styles %}
+        {% endblock %}
     </head>
     <body>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -20,18 +23,19 @@
             </ul>
             <ul class="navbar-nav mr-auto navbar-right">
                 {% block right_nav %}
-                <li class="nav-item">
+                <li>
                     <div class="dropdown">
                         <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">
                             Login <span class="sr-only">(current)</span>
                         </a>
                         <div class="dropdown-menu" >
-                            <h3 class="dropdown-header"> Login </h3>
+                            <p class="dropdown-header"> Login </p>
                             <form id="loginForm" action="" method="post" class="form-group">
                                 {% csrf_token %}
                                 {{ form }}
                                 <input id="login_btn" type="submit" value="Login">
                             </form>
+                            <span>Don't have an account? <a href="/signup/">Sign up!</a></span>
                         </div>
                     </div>
                 </li>
@@ -53,5 +57,7 @@
         <script src="{% static 'js/jquery.min.js' %}"></script>
         <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')</script>
         <script src="{% static 'js/bootstrap.js' %}"></script>
+        {% block scripts %}
+        {% endblock %}
     </body>
 </html>
