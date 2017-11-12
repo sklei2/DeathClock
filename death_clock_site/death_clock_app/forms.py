@@ -5,8 +5,12 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(required=True, label='Username')
-    password = forms.CharField(widget=forms.PasswordInput(), required=True, label='Password')
+    username = forms.CharField(required=True,
+                               label='Username',
+                               widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+                               required=True,
+                               label='Password')
 
     def __init__(self, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)

@@ -1,17 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block scripts %}
-<script src="{% static 'js/site.js' %}"></script>
+{% block left_nav %}
+<ul class="navbar-nav mr-auto">
+  <li class="nav-item active">
+    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Calculate Death</a>
+  </li>
+</ul>
 {% endblock %}
-
-{% block right_navigation %}
-<div class="nav_item"><a href="/test/" class="{% block testclass %}{% endblock %}">Take our Test!</a></div>
-<div class="nav_item" onclick="profileImageClick()">
-    <img src="{% static 'img/blank-profile-picture.png' %}" alt="profile_pictue" class="profile_picture dropdown"/>
-    <div id="dropdown_content" class="dropdown_content">
-        <a href="profile/" class="dropdown_first">Profile</a>
-        <a href="logout/">Log Out</a>
-    </div>
-</div>
+{% block right_nav %}
 {% endblock %}
