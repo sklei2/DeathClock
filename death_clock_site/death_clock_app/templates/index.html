@@ -2,5 +2,11 @@
 {% block title %} Index {% endblock %}
 
 {% block content %}
-<p>{{ username }} is logged in!</p>
+    <p>{{ username }} is logged in!</p>
+
+    <form id="question_form" action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_ul }}
+        <input id="submit_btn" type="submit" value="Submit">
+    </form>
 {% endblock %}

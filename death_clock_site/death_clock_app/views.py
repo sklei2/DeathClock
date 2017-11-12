@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import authenticate
@@ -11,9 +10,10 @@ from django.shortcuts import render, render_to_response
 from .forms import *
 from django.db import IntegrityError
 from django.urls import reverse
+from . import death_algorithm
 from django.template import loader
-
 import datetime
+
 
 # Create your views here.
 def login(request):
@@ -69,7 +69,19 @@ def profile(request):
 
     return render(request, 'profile.html', {'life_expectancy': life_expectancy})
 
+
 @login_required(login_url='/login/')
 def index(request):
     user = request.user
-    return render(request, 'index.html', {'username': user.username})
+
+    # If post, then display form with previous data
+    if request.method == 'POST':
+        form = QuestionForm(data=request.POST)
+        # Insert code to apply results to user object here
+        death_algorithm([x for x in request.POST if x.key != 'csrfmiddlewaretoken'])
+
+    # If get, then display new form
+    else:
+        form = QuestionForm()
+
+    return render(request, 'index.html', {'username': user.username, 'form': form})
