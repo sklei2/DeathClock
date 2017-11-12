@@ -1,44 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Index</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-</head>
-<body>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">Death Clock</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/index">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Calculate Death</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="/profile">Profile</a>
-          </li>
-        </ul>\
-      </div>
-    </nav>
-    <div class="jumbotron">
-        <div class="container">
-            {% block content %}
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/site.css' %}">
+        {% block styles %}
+        {% endblock %}
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+          <a class="navbar-brand" href="/index/">Death Clock</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+            {% block left_nav %}
             {% endblock %}
+            </ul>
+            <ul class="navbar-nav mr-auto navbar-right">
+                {% block right_nav %}
+                <li>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">
+                            Login <span class="sr-only">(current)</span>
+                        </a>
+                        <div class="dropdown-menu" >
+                            <p class="dropdown-header"> Login </p>
+                            <form id="loginForm" action="" method="post" class="form-group">
+                                {% csrf_token %}
+                                {{ form }}
+                                <input id="login_btn" type="submit" value="Login">
+                            </form>
+                            <span>Don't have an account? <a href="/signup/">Sign up!</a></span>
+                        </div>
+                    </div>
+                </li>
+                {% endblock %}
+            </ul>
+          </div>
+        </nav>
+        <div class="jumbotron">
+            <div class="container">
+                {% block content %}
+                {% endblock %}
+            </div>
         </div>
-    </div>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../../../assets/js/vendor/popper.min.js"></script>
-    <script src="../../../../dist/js/bootstrap.min.js"></script>
-
-</body>
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        {% load static %}
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+        <script src="{% static 'js/bootstrap.js' %}"></script>
+        {% block scripts %}
+        {% endblock %}
+    </body>
 </html>
