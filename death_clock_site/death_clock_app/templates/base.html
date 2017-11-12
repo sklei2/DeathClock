@@ -14,10 +14,12 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
             {% block left_nav %}
             {% endblock %}
-            {% block right_nav %}
-            <ul class="navbar-nav mr-auto">
+            </ul>
+            <ul class="navbar-nav mr-auto navbar-right">
+                {% block right_nav %}
                 <li class="nav-item">
                     <div class="dropdown">
                         <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">
@@ -33,8 +35,8 @@
                         </div>
                     </div>
                 </li>
+                {% endblock %}
             </ul>
-            {% endblock %}
           </div>
         </nav>
         <div class="jumbotron">
