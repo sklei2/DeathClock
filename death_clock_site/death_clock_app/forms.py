@@ -2,6 +2,8 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from .models import *
+from registration.forms import RegistrationForm
+from django.contrib.auth.models import User
 
 
 # Question object for easy storage of form questions
@@ -43,15 +45,26 @@ class LoginForm(forms.Form):
 
 
 class UserSignupForm(forms.Form):
+
+    SEX_CHOICES = {
+        ('M', 'Male'),
+        ('F', 'Female')
+    }
+
+    # Username
     username = forms.CharField(required=True,
                                label='Username')
+    # Password
     pwd = forms.CharField(required=True,
                           widget=forms.PasswordInput(),
                           label='Password')
-
     pwd_check = forms.CharField(required=True,
                                 widget=forms.PasswordInput(),
                                 label='Confirm Password')
+    # Profile Information
+    sex = forms.ChoiceField(SEX_CHOICES,
+                            required=True,
+                            label='Biological Sex')
 
     def __init__(self, *args, **kwargs):
         super(UserSignupForm, self).__init__(*args, **kwargs)
@@ -66,3 +79,17 @@ class UserSignupForm(forms.Form):
         except KeyError:
             pass
         return self.cleaned_data
+
+    def register(self):
+        # generate the user as we normally would
+        new_user = User.objects.create_user(username= self.cleaned_data['username'],
+                                            password=self.cleaned_data['pwd'])
+
+        new_user.save()
+
+        # create the profile with our data
+        sex = self.cleaned_data['sex']
+        new_user.profile.sex = sex
+        new_user.profile.save()
+
+        return new_user
