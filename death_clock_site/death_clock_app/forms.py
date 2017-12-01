@@ -1,9 +1,8 @@
 from django import forms
-from django.core.exceptions import ValidationError
-from django.utils.translation import ugettext_lazy as _
 from .models import *
-from registration.forms import RegistrationForm
 from django.contrib.auth.models import User
+from django.forms.extras.widgets import SelectDateWidget
+import datetime
 
 
 # Question object for easy storage of form questions
@@ -65,6 +64,9 @@ class UserSignupForm(forms.Form):
     sex = forms.ChoiceField(SEX_CHOICES,
                             required=True,
                             label='Biological Sex')
+    dob = forms.DateField(widget=SelectDateWidget(years=range(1920, datetime.date.today().year)),
+                          required=True,
+                          label='Date Of Birth')
 
     def __init__(self, *args, **kwargs):
         super(UserSignupForm, self).__init__(*args, **kwargs)
@@ -89,7 +91,9 @@ class UserSignupForm(forms.Form):
 
         # create the profile with our data
         sex = self.cleaned_data['sex']
+        dob = self.cleaned_data['dob']
         new_user.profile.sex = sex
+        new_user.profile.dob = dob
         new_user.profile.save()
 
         return new_user
