@@ -64,7 +64,9 @@ class UserSignupForm(forms.Form):
     sex = forms.ChoiceField(SEX_CHOICES,
                             required=True,
                             label='Biological Sex')
-    dob = forms.DateField(widget=SelectDateWidget(years=range(1920, datetime.date.today().year)),
+    todays_date = datetime.date.today().year
+    years_before = 100
+    dob = forms.DateField(widget=SelectDateWidget(years=range(todays_date - years_before, todays_date)),
                           required=True,
                           label='Date Of Birth')
 
@@ -84,7 +86,7 @@ class UserSignupForm(forms.Form):
 
     def register(self):
         # generate the user as we normally would
-        new_user = User.objects.create_user(username= self.cleaned_data['username'],
+        new_user = User.objects.create_user(username=self.cleaned_data['username'],
                                             password=self.cleaned_data['pwd'])
 
         new_user.save()
