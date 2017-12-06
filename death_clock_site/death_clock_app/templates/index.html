@@ -1,10 +1,8 @@
-{% extends 'base.html' %}
+{% extends "logged_in_base.html" %}
+{% block title %} Index {% endblock %}
 
 {% block content %}
     <p>{{ username }} is logged in!</p>
-    <a href="/display/" id="display">View Life Expectancy</a>
-    <a href="/logout/" id="logout">Log Out</a>
-
     <form id="question_form" action="" method="POST">
         {% csrf_token %}
         {{ form.as_ul }}
