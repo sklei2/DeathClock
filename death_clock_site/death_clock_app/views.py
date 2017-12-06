@@ -10,6 +10,7 @@ from django.shortcuts import render, render_to_response
 from .forms import *
 from django.db import IntegrityError
 from django.urls import reverse
+from .models import *
 from . import death_algorithm
 from django.template import loader
 import datetime
@@ -70,7 +71,6 @@ def profile(request):
 @login_required(login_url='/login/')
 def index(request):
     user = request.user
-
     # If post, then display form with previous data
     if request.method == 'POST':
         form = QuestionForm(data=request.POST)
@@ -90,3 +90,15 @@ def index(request):
         form = QuestionForm()
 
     return render(request, 'index.html', {'username': user.username, 'form': form})
+
+def display(request):
+    profile = Profile.objects.get(user=request.user)
+    if profile.life_expectancy == None and profile.dob != None:
+        life_expectancy = datetime.date.today()
+        life_expectancy = life_expectancy.replace(year = 78 + profile.dob.year)
+        return render(request, 'display.html', {'life_expectancy': life_expectancy})
+    elif profile.life_expectancy == None and profile.dob == None:
+        life_expectancy = datetime.date.today().replace(year = 78 + datetime.date.today().year)
+        return render(request, 'display.html', {'life_expectancy': life_expectancy})
+    else:
+        return render(request, 'display.html', {'life_expectancy': profile.life_expectancy})

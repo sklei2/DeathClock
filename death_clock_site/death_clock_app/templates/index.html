@@ -3,7 +3,6 @@
 
 {% block content %}
     <p>{{ username }} is logged in!</p>
-
     <form id="question_form" action="" method="POST">
         {% csrf_token %}
         {{ form.as_ul }}

@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^logout', logout, name='logout'),
     url(r'^profile', profile, name='profile'),
     url(r'^index', index, name='index'),
+    url(r'^display/?', display, name='display'),
     url(r'', index, name='index'),
     # catch all for urls so that we go to the index
     url(r'^', RedirectView.as_view(url='/')),
