@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'death_clock_app.apps.DeathClockAppConfig'
+    'death_clock_app.apps.DeathClockAppConfig'#,
+    #'django.contrib.sites'
 ]
 
 MIDDLEWARE = [

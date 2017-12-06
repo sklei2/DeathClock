@@ -27,5 +27,7 @@ class CustomUserAdmin(UserAdmin):
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(models.Question)
-admin.site.register(models.Answer)
 admin.site.register(models.CauseOfDeath)
+admin.site.register(models.Symptom)
+admin.site.register(models.QuestionSymptomMapper)
+
