@@ -75,7 +75,15 @@ def index(request):
     if request.method == 'POST':
         form = QuestionForm(data=request.POST)
         # Insert code to apply results to user object here
-        death_algorithm([x for x in request.POST if x.key != 'csrfmiddlewaretoken'])
+
+        # Filter POST Data to get all questions
+        questions = []
+        for item in request.POST:
+            if str(item) != "csrfmiddlewaretoken":
+                questions.append(item)
+
+        #send questions to algorithm
+        death_algorithm.run_algorithm(questions)
 
     # If get, then display new form
     else:
