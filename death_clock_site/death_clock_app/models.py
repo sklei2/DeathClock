@@ -8,6 +8,7 @@ Questions store only the text of the question its self
 answers must be found in the answer's table using a lookup function/statment
 """
 class Question(models.Model):
+    id = models.IntegerField(primary_key=True)
     question = models.CharField(max_length=4096)
 
     def __str__(self):
@@ -18,23 +19,31 @@ class Question(models.Model):
 Cause of death is used by answers to figure out how its impact fits into the algorithm
 """
 class CauseOfDeath(models.Model):
+    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=256)
 
     def __str__(self):
         return self.name
 
-
 """
-Answers store the question they are attached to, their impact amount and link to an impact type (Cause of Death)
+Symptoms are linked to answers, can be solid value or multiplier
 """
-class Answer(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    text = models.CharField(max_length=1024)
+class Symptom(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=1024)
     impact = models.IntegerField()
-    impact_type = models.ForeignKey(CauseOfDeath, on_delete=models.CASCADE)
+    multiplier = models.BooleanField()
+    cause = models.ForeignKey(CauseOfDeath, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.text
+"""
+Mapper table between answers and symptoms (many to many)
+"""
+class QuestionSymptomMapper(models.Model):
+    symptom = models.ForeignKey(Symptom, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+
+
+
 
 
 """
