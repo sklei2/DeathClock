@@ -1,13 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'logged_in_base.html' %}
 
-{% block content %}
-    <div class="jumbotron">
-        <div class="container">
-            <h1 class="display-3">Profile for {{user}} </h1>
-                <p> Username : {{ user.profile.user }} </p>
-                <p> Date of Birth : {% if user.profile.dob %} {{ user.profile.dob }} {% else %} Please give us your Date of Birth {% endif %} </p>
-                <p> Life Expectancy : {{ life_expectancy }} </p>
-        </div>
-    </div>
+{% block title %} {{user}}'s Profile {% endblock %}
+
+{% block styles %}
+<link href="navbar-top-fixed.css" rel="stylesheet">
 {% endblock %}
 
+{% block content %}
+<h1 class="display-3">Profile for {{user}} </h1>
+<p> Username : {{ user.profile.user }} </p>
+<p> Date of Birth : {% if user.profile.dob %} {{ user.profile.dob }} {% else %} Please give us your Date of Birth {% endif %} </p>
+<p> Life Expectancy : {{ life_expectancy }} </p>
+{% endblock %}
