@@ -67,9 +67,6 @@ class Profile(models.Model):
                            null=True)
     life_expectancy = models.DateField(null=True)
 
-    class Meta:
-        db_table = 'user_info'
-
 
 """
 Hook up our extra information so that when we make a user we can have
