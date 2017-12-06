@@ -44,10 +44,7 @@ def signup(request):
         form = UserSignupForm(data=request.POST)
         if form.is_valid():
             try:
-                user_name = request.POST.get('username')
-                pwd = request.POST.get('pwd')
-                user = User.objects.create_user(username=user_name, password=pwd)
-                user.save()
+                user = form.register()
                 return HttpResponseRedirect(reverse('login'))
             except IntegrityError:
                 # We already have this user!
@@ -87,8 +84,6 @@ def index(request):
 
         #send questions to algorithm
         death_algorithm.run_algorithm(questions)
-
-        #death_algorithm([x for x in request.POST])
 
     # If get, then display new form
     else:
