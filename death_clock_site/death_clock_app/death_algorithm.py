@@ -30,16 +30,11 @@ def run_algorithm(data, user_profile):
                 else:
                     causesOfDeathOffset[symptom.cause.name] += symptom.impact
 
-    # Apply each multiplier
+    # Calculate stuff
+    ratio = 1
     for cause in CauseOfDeath.objects.all():
         causesOfDeathOffset[cause.name] *= causesOfDeathMultiplier[cause.name]
-
-    # Average values
-    sum = 0
-    for cause in CauseOfDeath.objects.all():
-        sum += causesOfDeathOffset[cause.name]
-
-    subVal = sum / len(CauseOfDeath.objects.all())
+        ratio *= (american_average + causesOfDeathOffset[cause.name]) / american_average
 
     # returns years of life from dob - death.
-    return american_average + subVal
+    return american_average * ratio
