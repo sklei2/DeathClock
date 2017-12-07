@@ -65,7 +65,7 @@ class Profile(models.Model):
                                ('F', 'Female')
                            ),
                            null=True)
-    life_expectancy = models.DateField(null=True)
+    life_expectancy = models.DateTimeField(null=True)
 
 
 """
@@ -76,12 +76,4 @@ these fields.
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
-
-
-"""
-Hook up our extra information so that when we save a User we also save
-our information
-"""
-@receiver(post_save, sender=settings.AUTH_USER_MODEL)
-def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
