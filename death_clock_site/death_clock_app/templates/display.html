@@ -1,17 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Your Life Expectancy</title>
-</head>
-<body>
+{% extends "logged_in_base.html" %}
+
+{% block title %} Countdown {% endblock %}
+
+{% block content %}
     <p>Your Life Expectancy</p>
-    <p id="demo"></p>
+    <p id="countdown"></p>
+{% endblock %}
 
-<script>
-            //Set the date we're counting down to
+{% block scripts %}
+
+    <script>
+        //Set the date we're counting down to
+        if ( "{{life_expectancy}}" ) {
             var countDownDate = new Date("{{ life_expectancy.isoformat }}").getTime();
-
             // Update the count down every 1 second
             var x = setInterval(function() {
 
@@ -28,15 +29,18 @@
                 var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
                    // Output the result in an element with id="demo"
-                document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+                document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
                 + minutes + "m " + seconds + "s ";
 
                 // If the count down is over, write some text
                 if (distance < 0) {
                     clearInterval(x);
-                    document.getElementById("demo").innerHTML = "EXPIRED";
+                    document.getElementById("countdown").innerHTML = "EXPIRED";
                 }
             }, 1000);
-        </script>
-    </body>
-</html>
+        } else {
+            var countdown = document.getElementById("countdown").innerHTML = "Please take our survey first";
+        }
+
+    </script>
+{% endblock %}
