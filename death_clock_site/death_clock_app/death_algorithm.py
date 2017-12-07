@@ -4,7 +4,7 @@ american_average = 78.74
 
 # Get list of questions in list, look up in db to see what linked effects are, put effects into categories, calculate individual categories, average categories
 
-def run_algorithm(data):
+def run_algorithm(data, user_profile):
     # Dictionaries of offsets and multipliers for each cause of death
     causesOfDeathOffset = {}
     causesOfDeathMultiplier = {}
@@ -21,10 +21,14 @@ def run_algorithm(data):
         for map in QuestionSymptomMapper.objects.filter(question=question.id):
             symptom = Symptom.objects.filter(id=map.symptom.id)[0]
             # Sum or multiply into appropriate dictionary
-            if symptom.multiplier:
-                causesOfDeathMultiplier[symptom.cause.name] *= symptom.impact
-            else:
-                causesOfDeathOffset[symptom.cause.name] += symptom.impact
+            if (("-F" in symptom.name and user_profile.sex == "F")
+                or ("-M" in symptom.name and user_profile.sex == "M")
+                or ("-M" not in symptom.name and "-F" not in symptom.name)):
+
+                if symptom.multiplier:
+                    causesOfDeathMultiplier[symptom.cause.name] *= symptom.impact
+                else:
+                    causesOfDeathOffset[symptom.cause.name] += symptom.impact
 
     # Apply each multiplier
     for cause in CauseOfDeath.objects.all():
@@ -36,7 +40,6 @@ def run_algorithm(data):
         sum += causesOfDeathOffset[cause.name]
 
     subVal = sum / len(CauseOfDeath.objects.all())
-    print(subVal)
-    print(american_average + subVal)
 
+    # returns years of life from dob - death.
     return american_average + subVal
