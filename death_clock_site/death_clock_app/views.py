@@ -10,6 +10,7 @@ from django.shortcuts import render, render_to_response
 from .forms import *
 from django.db import IntegrityError
 from django.urls import reverse
+from .models import *
 from . import death_algorithm
 from django.template import loader
 import datetime
@@ -44,7 +45,7 @@ def signup(request):
         form = UserSignupForm(data=request.POST)
         if form.is_valid():
             try:
-                user = form.register()
+                form.register()
                 return HttpResponseRedirect(reverse('login'))
             except IntegrityError:
                 # We already have this user!
@@ -70,7 +71,6 @@ def profile(request):
 @login_required(login_url='/login/')
 def index(request):
     user = request.user
-
     # If post, then display form with previous data
     if request.method == 'POST':
         form = QuestionForm(data=request.POST)
@@ -83,10 +83,28 @@ def index(request):
                 questions.append(item)
 
         #send questions to algorithm
-        death_algorithm.run_algorithm(questions)
-
-    # If get, then display new form
+        user_profile = Profile.objects.get(user=user)
+        years_to_live = death_algorithm.run_algorithm(questions, user_profile)
+        # convert life expectancy to ms so that we can add it to our DOB
+        ms_to_live = years_to_live * 365 * 24 * 60 * 60 * 1000
+        user_profile.life_expectancy = user_profile.dob + datetime.timedelta(milliseconds=ms_to_live)
+        user_profile.save()
+        user.save()
+        # go to the display page
+        return HttpResponseRedirect(reverse('display'))
     else:
+        # If get, then display new form
         form = QuestionForm()
 
     return render(request, 'index.html', {'username': user.username, 'form': form})
+
+
+def display(request):
+    profile = Profile.objects.get(user=request.user)
+    print("DOB: {}".format(profile.dob))
+    print("User: {}".format(profile.user.username))
+    print("Life_expectancy: {}".format(profile.life_expectancy))
+    if profile.life_expectancy:
+        return render(request, 'display.html', {'life_expectancy': profile.life_expectancy})
+    else:
+        return render(request, 'display.html', {})
