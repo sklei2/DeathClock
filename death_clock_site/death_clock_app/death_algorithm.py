@@ -1,6 +1,6 @@
 from .models import *
 
-american_average = 78.74
+american_average = 90#78.74
 
 # Get list of questions in list, look up in db to see what linked effects are, put effects into categories, calculate individual categories, average categories
 
@@ -9,8 +9,10 @@ def run_algorithm(data, user_profile):
     causesOfDeathOffset = {}
     causesOfDeathMultiplier = {}
 
+    causes = CauseOfDeath.objects.all()
+
     # Init each dictionary
-    for cause in CauseOfDeath.objects.all():
+    for cause in causes:
         causesOfDeathOffset[cause.name] = 0
         causesOfDeathMultiplier[cause.name] = 1
 
@@ -32,9 +34,20 @@ def run_algorithm(data, user_profile):
 
     # Calculate stuff
     ratio = 1
-    for cause in CauseOfDeath.objects.all():
+    sum = 0
+    for cause in causes:
         causesOfDeathOffset[cause.name] *= causesOfDeathMultiplier[cause.name]
+        sum += causesOfDeathOffset[cause.name]
         ratio *= (american_average + causesOfDeathOffset[cause.name]) / american_average
 
+    sum /= len(causes)
+
+    print("Ratio Val: " + str(american_average * ratio) )
+    print("Sum Val:   " + str(american_average + sum))
+    test = american_average * ratio
+    test += american_average + sum
+    test /= 2
+    print("Test Val:  " + str(test))
+
     # returns years of life from dob - death.
-    return american_average * ratio
+    return test

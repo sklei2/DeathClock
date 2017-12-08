@@ -101,9 +101,6 @@ def index(request):
 
 def display(request):
     profile = Profile.objects.get(user=request.user)
-    print("DOB: {}".format(profile.dob))
-    print("User: {}".format(profile.user.username))
-    print("Life_expectancy: {}".format(profile.life_expectancy))
     if profile.life_expectancy:
         return render(request, 'display.html', {'life_expectancy': profile.life_expectancy})
     else:
