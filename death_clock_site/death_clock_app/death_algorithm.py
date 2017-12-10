@@ -1,6 +1,6 @@
 from .models import *
 
-american_average = 90#78.74
+normalLifeExpectancy = 90#78.74
 
 # Get list of questions in list, look up in db to see what linked effects are, put effects into categories, calculate individual categories, average categories
 
@@ -38,16 +38,16 @@ def run_algorithm(data, user_profile):
     for cause in causes:
         causesOfDeathOffset[cause.name] *= causesOfDeathMultiplier[cause.name]
         sum += causesOfDeathOffset[cause.name]
-        ratio *= (american_average + causesOfDeathOffset[cause.name]) / american_average
+        ratio *= (normalLifeExpectancy + causesOfDeathOffset[cause.name]) / normalLifeExpectancy
 
     sum /= len(causes)
 
-    print("Ratio Val: " + str(american_average * ratio) )
-    print("Sum Val:   " + str(american_average + sum))
-    test = american_average * ratio
-    test += american_average + sum
-    test /= 2
-    print("Test Val:  " + str(test))
+    print("Ratio Val: " + str(normalLifeExpectancy * ratio))
+    print("Sum Val:   " + str(normalLifeExpectancy + sum))
+    lifeExpectancy = normalLifeExpectancy * ratio
+    lifeExpectancy += normalLifeExpectancy + sum
+    lifeExpectancy /= 2
+    print("Test Val:  " + str(lifeExpectancy))
 
     # returns years of life from dob - death.
-    return test
+    return lifeExpectancy
