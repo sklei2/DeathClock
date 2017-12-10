@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.forms.extras.widgets import SelectDateWidget
+from django.forms.widgets import SelectDateWidget
 import datetime
 from .PopulateSurveyTables import populateSurveyTables
 from .models import *
@@ -49,7 +49,7 @@ class UserSignupForm(forms.Form):
                                 widget=forms.PasswordInput(),
                                 label='Confirm Password')
     # Profile Information
-    sex = forms.ChoiceField(SEX_CHOICES,
+    sex = forms.ChoiceField(choices=SEX_CHOICES,
                             required=True,
                             label='Biological Sex')
     todays_date = datetime.date.today().year
