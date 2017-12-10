@@ -23,6 +23,5 @@ urlpatterns = [
     url(r'^admin', admin.site.urls),
     # All the urls that lead to our app.
     url(r'^', include('death_clock_app.urls')),
-    url(r'^index', include('death_clock_app.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
