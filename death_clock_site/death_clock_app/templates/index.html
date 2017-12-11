@@ -2,10 +2,12 @@
 {% block title %} Index {% endblock %}
 
 {% block content %}
-    <p>{{ username }} is logged in!</p>
+    <h2>{{ username }} Survey</h2>
     <form id="question_form" action="" method="POST">
         {% csrf_token %}
-        {{ form.as_ul }}
+        <table class="form-group form-table">
+            {{ form.as_table }}
+        </table>
         <input id="submit_btn" type="submit" value="Submit">
     </form>
 {% endblock %}
