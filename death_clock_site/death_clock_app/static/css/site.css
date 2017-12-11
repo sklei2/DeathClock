@@ -2,6 +2,16 @@
     max-width: 50px;
 }
 
+.form-table {
+    border-collapse: collapse;
+}
+
+.form-table tr td {
+    padding-top: .25em;
+    padding-bottom: .25em;
+    padding-left: 1em;
+}
+
 .show {
     display: block;
 }
