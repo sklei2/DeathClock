@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, render_to_response
 from .forms import *
 from django.db import IntegrityError
-from django.urls import reverse
+from django.core.urlresolvers import reverse
 from .models import *
 from . import death_algorithm
 from django.template import loader
